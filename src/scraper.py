@@ -7,7 +7,9 @@ LOG_CONNECTION_FAILURE = "Could not connect to {}"
 LOG_DIV_FOUND = "Successfully found div '{}' at index {} : '{}'"
 LOG_DIV_NOTFOUND = "Could not find div '{}' at index {}"
 
-URL_MONSTER = "http://mhgen.kiranico.com/fr/monstre/"
+URL_MONSTER = "http://mhgen.kiranico.com/fr/monstre/{}"
+URL_MONSTER_ICON = "https://grox2006.github.io/Kayambot/resources/images/thumbnails/monster_{}.png"
+URL_MONSTER_ICON_CONSTANT = "https://grox2006.github.io/Kayambot/resources/images/thumbnails/icon_monster.png"
 URL_HEADER = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',

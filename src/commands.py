@@ -17,14 +17,18 @@ MESSAGE_UNDEFINED_MONSTER = [
 
 async def on_monster(client, message, arguments):
     if len(arguments) > 0:
-        parser = await scraper.get_site(scraper.URL_MONSTER + arguments[0])
+        monster_id = arguments[0]
+        monster_url = scraper.URL_MONSTER.format(monster_id)
+        parser = await scraper.get_site(monster_url)
         if parser != None:
             monster_name = await scraper.get_text(parser, "h3[itemprop='name']")
             monster_hp = await scraper.get_text(parser, ".card .card-block .lead", 0) + "PV";
+            monster_colour = discord.Colour(0x0B3372);
+            monster_icon = scraper.URL_MONSTER_ICON.format(monster_id)
 
-            embed = discord.Embed(title="", description=monster_hp, colour=discord.Colour(0x0B3372))
-            embed.set_author(name=monster_name, url="http://mhgen.kiranico.com/fr/monstre/lagiacrus", icon_url="https://grox2006.github.io/Kayambot/resources/images/thumbnails/icon_monster.png")
-            embed.set_thumbnail(url="https://grox2006.github.io/Kayambot/resources/images/thumbnails/monster_lagiacrus.png")
+            embed = discord.Embed(title="", description=monster_hp, colour=monster_colour)
+            embed.set_author(name=monster_name, url=monster_url, icon_url=scraper.URL_MONSTER_ICON_CONSTANT)
+            embed.set_thumbnail(url=monster_icon)
             await client.send_message(message.channel, "", embed=embed);
         else:
             await kayambot.speak(message.channel, MESSAGE_UNDEFINED_MONSTER)
