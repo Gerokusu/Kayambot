@@ -1,6 +1,5 @@
 import urllib.request
 from bs4 import BeautifulSoup
-import kayambot
 
 LOG_CONNECTION_SUCCESS = "Successfully connected to {}"
 LOG_CONNECTION_FAILURE = "Could not connect to {}"
@@ -19,21 +18,21 @@ URL_HEADER = {
     'Connection': 'keep-alive'
 }
 
-async def get_site(url):
+async def get_site(bot, url):
     parser = None
     try:
         parser = BeautifulSoup(urllib.request.urlopen(urllib.request.Request(url, headers=URL_HEADER)).read(), "lxml")
-        kayambot.log_ok(LOG_CONNECTION_SUCCESS, url)
+        bot.log_ok(LOG_CONNECTION_SUCCESS, url)
     except Exception:
-        kayambot.log_error(LOG_CONNECTION_FAILURE, url)
+        bot.log_error(LOG_CONNECTION_FAILURE, url)
     return parser;
 
-async def get_text(parser, selector, index = 0):
+async def get_text(bot, parser, selector, index = 0):
     result = ""
     response = parser.select(selector)
     if len(response) > index:
         result = response[index].getText()
-        kayambot.log_ok(LOG_DIV_FOUND, selector, index, response[index])
+        bot.log_ok(LOG_DIV_FOUND, selector, index, response[index])
     else:
-        kayambot.log_error(LOG_DIV_NOTFOUND, selector, index)
+        bot.log_error(LOG_DIV_NOTFOUND, selector, index)
     return result
