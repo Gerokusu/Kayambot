@@ -29,4 +29,4 @@ async def on_monster(bot, message, arguments):
             embed.set_thumbnail(url=monster_icon)
             await bot.client.send_message(message.channel, "", embed=embed);
         else:
-            await bot.speak(message.channel, MESSAGE_UNDEFINED_MONSTER)
+            await bot.speak(MESSAGE_UNDEFINED_MONSTER)
